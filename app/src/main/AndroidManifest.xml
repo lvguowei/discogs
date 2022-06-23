@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Discogs"
         tools:targetApi="31">
         <activity
-            android:name=".ui.labels.LabelsActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

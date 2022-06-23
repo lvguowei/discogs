@@ -5,10 +5,10 @@ import com.example.discogs.usecases.models.LabelModel
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class GetLabelsUseCase(private val discogsApi: DiscogsApi) {
+class SearchLabelsUseCase(private val discogsApi: DiscogsApi) {
 
-  fun getLabels(query: String? = null): Single<List<LabelModel>> =
-    discogsApi.searchLabels(query.orEmpty())
+  fun search(query: String): Single<List<LabelModel>> =
+    discogsApi.searchLabels(query)
       .flattenAsObservable { it.results }
       .flatMapSingle { searchLabel ->
         Single.zip(

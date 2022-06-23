@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.discogs.R
 import com.example.discogs.databinding.FragmentLabelsBinding
+import com.example.discogs.ui.common.GridItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LabelsFragment : Fragment() {
@@ -16,6 +18,8 @@ class LabelsFragment : Fragment() {
   private lateinit var binding: FragmentLabelsBinding
 
   private val viewModel: LabelsViewModel by viewModel()
+
+  private lateinit var labelsAdapter: LabelsAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -33,14 +37,34 @@ class LabelsFragment : Fragment() {
       vm = viewModel
       lifecycleOwner = viewLifecycleOwner
     }
-
+    setupViews()
     observeViewModel()
+  }
+
+  private fun setupViews() {
+    setupRecyclerView()
+    setupSearchView()
+  }
+
+  private fun setupSearchView() {
+    binding.button.setOnClickListener {
+      viewModel.searchLabels(binding.search.text.toString())
+    }
+  }
+
+  private fun setupRecyclerView() {
+    labelsAdapter = LabelsAdapter()
+
+    binding.labelsRecyclerView.apply {
+      adapter = labelsAdapter
+      addItemDecoration(GridItemDecoration(resources.getDimensionPixelSize(R.dimen.spacing)))
+    }
   }
 
 
   private fun observeViewModel() {
     viewModel.labels.observe(viewLifecycleOwner) {
-      Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+      labelsAdapter.setData(it)
     }
 
     viewModel.loading.observe(viewLifecycleOwner) {

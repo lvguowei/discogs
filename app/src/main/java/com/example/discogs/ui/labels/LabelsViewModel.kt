@@ -3,12 +3,12 @@ package com.example.discogs.ui.labels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.discogs.usecases.GetLabelsUseCase
+import com.example.discogs.usecases.SearchLabelsUseCase
 import com.example.discogs.usecases.models.LabelModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-class LabelsViewModel(private val getLabelsUseCase: GetLabelsUseCase) : ViewModel() {
+class LabelsViewModel(private val getLabelsUseCase: SearchLabelsUseCase) : ViewModel() {
 
   private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -25,9 +25,9 @@ class LabelsViewModel(private val getLabelsUseCase: GetLabelsUseCase) : ViewMode
     searchLabels()
   }
 
-  fun searchLabels() {
+  fun searchLabels(query: String? = null) {
     compositeDisposable.clear()
-    getLabelsUseCase.getLabels()
+    getLabelsUseCase.search(query.orEmpty())
       .observeOn(AndroidSchedulers.mainThread())
       .doOnSubscribe { _loading.value = true }
       .doFinally { _loading.value = false }

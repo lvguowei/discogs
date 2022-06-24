@@ -67,10 +67,6 @@ class LabelsFragment : Fragment() {
       labelsAdapter.setData(it)
     }
 
-    viewModel.loading.observe(viewLifecycleOwner) {
-
-    }
-
     viewModel.error.observe(viewLifecycleOwner) {
       Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
     }

@@ -9,9 +9,7 @@ val viewModelModule = module {
   viewModel {
     LabelsViewModel(get())
   }
-  viewModel {
-    //ReleasesViewModel()
-      (labelId: String) ->
-    ReleasesViewModel(labelId)
+  viewModel { (labelId: String) ->
+    ReleasesViewModel(labelId, get())
   }
 }

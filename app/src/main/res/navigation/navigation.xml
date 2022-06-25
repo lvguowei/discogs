@@ -23,5 +23,8 @@
         <argument
             android:name="labelId"
             app:argType="string" />
+        <argument
+            android:name="labelName"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -56,7 +56,7 @@ class LabelsFragment : Fragment() {
 
   private fun setupRecyclerView() {
     labelsAdapter = LabelsAdapter {
-      val action = LabelsFragmentDirections.actionLabelsFragmentToReleasesFragment(it.id)
+      val action = LabelsFragmentDirections.actionLabelsFragmentToReleasesFragment(it.id, it.name)
       findNavController().navigate(action)
     }
 
@@ -65,7 +65,6 @@ class LabelsFragment : Fragment() {
       addItemDecoration(GridItemDecoration(resources.getDimensionPixelSize(R.dimen.spacing)))
     }
   }
-
 
   private fun observeViewModel() {
     viewModel.labels.observe(viewLifecycleOwner) {

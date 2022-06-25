@@ -34,11 +34,13 @@ class LabelsAdapter(val onLabelClicked: (LabelModel) -> Unit) :
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val label = data[position]
-    holder.name.text = label.name
-    holder.releases.text = label.numberOfReleases.toString()
-    Glide.with(holder.thumb).load(label.thumb).into(holder.thumb)
-    holder.itemView.setOnClickListener {
-      onLabelClicked(label)
+    with(holder) {
+      name.text = label.name
+      releases.text = label.numberOfReleases.toString()
+      Glide.with(thumb).load(label.thumb).into(thumb)
+      itemView.setOnClickListener {
+        onLabelClicked(label)
+      }
     }
   }
 

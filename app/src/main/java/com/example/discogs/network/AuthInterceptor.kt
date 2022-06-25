@@ -6,10 +6,6 @@ import okhttp3.Response
 
 class AuthInterceptor() : Interceptor {
 
-  /**
-   * I didn't try very hard to secure the key and secret here.
-   * We could use something like EncryptedSharedPreference for better security.
-   */
   override fun intercept(chain: Interceptor.Chain): Response {
     val url = chain.request().url.newBuilder()
       .addQueryParameter("key", "ExtbXdYBmYGDERwCJpFs")

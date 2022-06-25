@@ -8,7 +8,7 @@ import com.example.discogs.usecases.models.LabelModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-class LabelsViewModel(private val getLabelsUseCase: SearchLabelsUseCase) : ViewModel() {
+class LabelsViewModel(private val searchLabelsUseCase: SearchLabelsUseCase) : ViewModel() {
 
   private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -27,7 +27,7 @@ class LabelsViewModel(private val getLabelsUseCase: SearchLabelsUseCase) : ViewM
 
   fun searchLabels(query: String? = null) {
     compositeDisposable.clear()
-    getLabelsUseCase.search(query.orEmpty())
+    searchLabelsUseCase.execute(query.orEmpty())
       .observeOn(AndroidSchedulers.mainThread())
       .doOnSubscribe { _loading.value = true }
       .doFinally { _loading.value = false }

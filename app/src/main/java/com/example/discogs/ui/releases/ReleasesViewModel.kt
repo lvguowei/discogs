@@ -25,7 +25,7 @@ class ReleasesViewModel(
   val error: LiveData<String> = _error
 
   init {
-    getLabelReleasesUseCase.get(labelId)
+    getLabelReleasesUseCase.execute(labelId)
       .observeOn(AndroidSchedulers.mainThread())
       .doOnSubscribe { _loading.value = true }
       .doFinally { _loading.value = false }
@@ -36,6 +36,9 @@ class ReleasesViewModel(
         { e ->
           _error.value = e.message
         })
+      .also {
+        compositeDisposable.add(it)
+      }
   }
 
   override fun onCleared() {

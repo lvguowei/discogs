@@ -7,8 +7,8 @@ import io.reactivex.schedulers.Schedulers
 
 class GetLabelReleasesUseCase(private val api: DiscogsApi) {
 
-  fun get(labelId: String): Single<List<ReleaseModel>> {
-    return api.getLabelReleases(labelId)
+  fun execute(labelId: String): Single<List<ReleaseModel>> =
+    api.getLabelReleases(labelId)
       .flattenAsObservable {
         it.releases
       }
@@ -28,5 +28,4 @@ class GetLabelReleasesUseCase(private val api: DiscogsApi) {
       }
       .toList()
       .subscribeOn(Schedulers.io())
-  }
 }

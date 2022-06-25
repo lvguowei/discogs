@@ -10,5 +10,18 @@
         android:id="@+id/labelsFragment"
         android:name="com.example.discogs.ui.labels.LabelsFragment"
         android:label="LabelsFragment"
-        tools:layout="@layout/fragment_labels" />
+        tools:layout="@layout/fragment_labels" >
+        <action
+            android:id="@+id/action_labelsFragment_to_releasesFragment"
+            app:destination="@id/releasesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/releasesFragment"
+        android:name="com.example.discogs.ui.releases.ReleasesFragment"
+        android:label="ReleasesFragment"
+        tools:layout="@layout/fragment_releases" >
+        <argument
+            android:name="labelId"
+            app:argType="string" />
+    </fragment>
 </navigation>

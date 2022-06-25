@@ -3,6 +3,8 @@ package com.example.discogs
 import android.app.Application
 import android.util.Log
 import com.example.discogs.di.appModule
+import com.example.discogs.di.useCaseModule
+import com.example.discogs.di.viewModelModule
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -12,7 +14,7 @@ class DiscogsApp : Application() {
     super.onCreate()
     startKoin {
       androidContext(this@DiscogsApp)
-      modules(appModule)
+      modules(appModule, useCaseModule, viewModelModule)
     }
     setupRxJava()
   }

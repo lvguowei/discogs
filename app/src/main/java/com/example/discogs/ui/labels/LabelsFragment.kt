@@ -1,12 +1,14 @@
 package com.example.discogs.ui.labels
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.discogs.R
 import com.example.discogs.databinding.FragmentLabelsBinding
@@ -53,7 +55,10 @@ class LabelsFragment : Fragment() {
   }
 
   private fun setupRecyclerView() {
-    labelsAdapter = LabelsAdapter()
+    labelsAdapter = LabelsAdapter {
+      val action = LabelsFragmentDirections.actionLabelsFragmentToReleasesFragment(it.id)
+      findNavController().navigate(action)
+    }
 
     binding.labelsRecyclerView.apply {
       adapter = labelsAdapter

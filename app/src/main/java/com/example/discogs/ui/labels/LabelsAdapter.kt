@@ -10,7 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.discogs.R
 import com.example.discogs.usecases.models.LabelModel
 
-class LabelsAdapter : RecyclerView.Adapter<LabelsAdapter.ViewHolder>() {
+class LabelsAdapter(val onLabelClicked: (LabelModel) -> Unit) :
+  RecyclerView.Adapter<LabelsAdapter.ViewHolder>() {
 
   private var data: MutableList<LabelModel> = mutableListOf()
 
@@ -36,6 +37,9 @@ class LabelsAdapter : RecyclerView.Adapter<LabelsAdapter.ViewHolder>() {
     holder.name.text = label.name
     holder.releases.text = label.numberOfReleases.toString()
     Glide.with(holder.thumb).load(label.thumb).into(holder.thumb)
+    holder.itemView.setOnClickListener {
+      onLabelClicked(label)
+    }
   }
 
   override fun getItemCount() = data.size

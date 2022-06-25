@@ -3,6 +3,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.example.discogs.ui.releases.ReleasesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
